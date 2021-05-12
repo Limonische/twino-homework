@@ -3,6 +3,8 @@
         Question(
             v-if="currentQuestion"
             :question="currentQuestion"
+            :key="currentQuestion.id"
+            @changeSelectedAnswer="changeSelectedAnswer"
         )
         button(@click="previousQuestion") Previous question
         button(@click="nextQuestion") Next question
@@ -27,7 +29,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('quiz', ['setQuizData', 'setCurrentQuestionIndex']),
+        ...mapActions('quiz', ['setQuizData', 'setCurrentQuestionIndex', 'changeSelectedAnswer']),
 
         previousQuestion() {
             if (this.currentQuestionIndex === 0) {

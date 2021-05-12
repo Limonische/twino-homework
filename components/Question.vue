@@ -24,13 +24,13 @@ export default {
 
     data() {
         return {
-            selectedAnswer: null
+            selectedAnswer: this.question.selectedAnswer || null
         }
     },
 
     watch: {
         selectedAnswer(newSelectedAnswer) {
-            this.$emit('changeSelectedAnswer', newSelectedAnswer)
+            this.$emit('changeSelectedAnswer', { questionId: this.question.id, newSelectedAnswer })
         }
     }
 }

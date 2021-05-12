@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { v4 as uuid } from 'uuid'
 
 export const state = () => ({
@@ -30,6 +31,19 @@ export const mutations = {
 
     SET_CURRENT_QUESTION_INDEX(state, index) {
         state.currentQuestionIndex = index
+    },
+
+    CHANGE_SELECTED_ANSWER(state, { questionId, newSelectedAnswer }) {
+        const questionToChange = state.questions.find(({ id }) => id === questionId)
+
+        if (!questionToChange) return
+
+        const questionIndex = state.questions.indexOf(questionToChange)
+
+        Vue.set(state.questions, questionIndex, {
+            ...questionToChange,
+            selectedAnswer: newSelectedAnswer
+        })
     }
 }
 
@@ -40,6 +54,10 @@ export const actions = {
 
     setCurrentQuestionIndex({ commit }, index) {
         commit('SET_CURRENT_QUESTION_INDEX', index)
+    },
+
+    changeSelectedAnswer({ commit }, { questionId, newSelectedAnswer = '' }) {
+        commit('CHANGE_SELECTED_ANSWER', { questionId, newSelectedAnswer })
     }
 }
 

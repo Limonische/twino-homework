@@ -4,6 +4,7 @@
             v-if="currentQuestion"
             :question="currentQuestion"
         )
+        button(@click="previousQuestion") Previous question
         button(@click="nextQuestion") Next question
 </template>
 
@@ -27,6 +28,14 @@ export default {
 
     methods: {
         ...mapActions('quiz', ['setQuizData', 'setCurrentQuestionIndex']),
+
+        previousQuestion() {
+            if (this.currentQuestionIndex === 0) {
+                return
+            }
+
+            this.setCurrentQuestionIndex(this.currentQuestionIndex - 1)
+        },
 
         nextQuestion() {
             if (this.currentQuestionIndex === this.questionCount - 1) {

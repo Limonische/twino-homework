@@ -22,7 +22,21 @@ export default {
 
     modules: ['@nuxtjs/axios'],
 
-    axios: {},
+    publicRuntimeConfig: {
+        apiPrefix: process.env.TWINO_API_PREFIX || '/api',
+        suitabilityURL: process.env.TWINO_SUITABILITY_URL || '/suitability'
+    },
+
+    axios: {
+        proxy: true
+    },
+
+    proxy: {
+        [`${process.env.TWINO_API_PREFIX || '/api'}`]: {
+            target: process.env.TWINO_API_URL || 'http://localhost:3001',
+            pathRewrite: { [`^${process.env.TWINO_API_PREFIX || '/api'}`]: '/' }
+        }
+    },
 
     build: {}
 }

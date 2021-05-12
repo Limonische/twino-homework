@@ -1,0 +1,10 @@
+module.exports = {
+    printWidth: 120,
+    tabWidth: 4,
+    semi: false,
+    arrowParens: 'avoid',
+    singleQuote: true,
+    endOfLine: 'lf',
+    htmlWhitespaceSensitivity: 'ignore',
+    trailingComma: 'none'
+}

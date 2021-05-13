@@ -6,9 +6,16 @@
             :key="currentQuestion.id"
             @changeSelectedAnswer="changeSelectedAnswer"
         )
+        Summary(v-if="!currentQuestion")
         Error(v-if="error")
-        button(@click="previousQuestion") Previous question
-        button(@click="nextQuestion") Next question
+        button(
+            v-if="currentQuestionIndex !== 0"
+            @click="previousQuestion"
+        ) Previous question
+        button(
+            v-if="currentQuestion"
+            @click="nextQuestion"
+        ) Next question
 </template>
 
 <script>
@@ -35,12 +42,22 @@ export default {
         previousQuestion() {
             if (this.currentQuestionIndex === 0) return
 
+            if (!this.currentQuestionIndex) {
+                this.setCurrentQuestionIndex(this.questionCount - 1)
+
+                return
+            }
+
             this.setError(false)
             this.setCurrentQuestionIndex(this.currentQuestionIndex - 1)
         },
 
         nextQuestion() {
-            if (this.currentQuestionIndex === this.questionCount - 1) return
+            if (this.currentQuestionIndex === this.questionCount - 1) {
+                this.setCurrentQuestionIndex(null)
+
+                return
+            }
 
             if (!this.currentQuestion.selectedAnswer) {
                 this.setError(true)

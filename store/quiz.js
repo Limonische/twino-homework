@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 import { v4 as uuid } from 'uuid'
 
 export const state = () => ({
@@ -76,5 +77,10 @@ export const getters = {
     questionCount: (_, { questions }) => questions.length,
     currentQuestionIndex: ({ currentQuestionIndex }) => currentQuestionIndex,
     currentQuestion: ({ questions, currentQuestionIndex }) => questions[currentQuestionIndex] || null,
-    error: ({ error }) => error
+    error: ({ error }) => error,
+
+    getGroupQuestions:
+        (_, { questions }) =>
+        groupId =>
+            questions.filter(question => question.groupId === groupId)
 }

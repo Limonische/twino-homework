@@ -11,6 +11,8 @@ export const state = () => ({
 
 export const mutations = {
     SET_QUIZ_DATA(state, groups) {
+        state.groups = []
+
         groups.forEach(group => {
             const groupId = uuid()
 
@@ -77,10 +79,21 @@ export const getters = {
     questionCount: (_, { questions }) => questions.length,
     currentQuestionIndex: ({ currentQuestionIndex }) => currentQuestionIndex,
     currentQuestion: ({ questions, currentQuestionIndex }) => questions[currentQuestionIndex] || null,
+    currentGroup: (_, { groups, currentQuestion }) =>
+        groups.find(group => group.id === currentQuestion?.groupId) || null,
     error: ({ error }) => error,
 
     getGroupQuestions:
         (_, { questions }) =>
         groupId =>
-            questions.filter(question => question.groupId === groupId)
+            questions.filter(question => question.groupId === groupId),
+
+    getGroupProgress:
+        (_, { getGroupQuestions }) =>
+        groupId => {
+            const questions = getGroupQuestions(groupId)
+            const questionsWithAnswer = questions.filter(question => question.selectedAnswer)
+
+            return parseInt((questionsWithAnswer.length / questions.length) * 100, 10)
+        }
 }

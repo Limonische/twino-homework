@@ -1,5 +1,6 @@
 <template lang="pug">
     .index-page
+        Progress
         Question(
             v-if="currentQuestion"
             :question="currentQuestion"

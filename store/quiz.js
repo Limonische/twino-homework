@@ -4,7 +4,8 @@ import { v4 as uuid } from 'uuid'
 export const state = () => ({
     groups: [],
     questions: [],
-    currentQuestionIndex: 0
+    currentQuestionIndex: 0,
+    error: false
 })
 
 export const mutations = {
@@ -33,6 +34,10 @@ export const mutations = {
         state.currentQuestionIndex = index
     },
 
+    SET_ERROR(state, error) {
+        state.error = error
+    },
+
     CHANGE_SELECTED_ANSWER(state, { questionId, newSelectedAnswer }) {
         const questionToChange = state.questions.find(({ id }) => id === questionId)
 
@@ -56,6 +61,10 @@ export const actions = {
         commit('SET_CURRENT_QUESTION_INDEX', index)
     },
 
+    setError({ commit }, error) {
+        commit('SET_ERROR', error)
+    },
+
     changeSelectedAnswer({ commit }, { questionId, newSelectedAnswer = '' }) {
         commit('CHANGE_SELECTED_ANSWER', { questionId, newSelectedAnswer })
     }
@@ -66,5 +75,6 @@ export const getters = {
     questions: ({ questions }) => questions,
     questionCount: (_, { questions }) => questions.length,
     currentQuestionIndex: ({ currentQuestionIndex }) => currentQuestionIndex,
-    currentQuestion: ({ questions, currentQuestionIndex }) => questions[currentQuestionIndex] || null
+    currentQuestion: ({ questions, currentQuestionIndex }) => questions[currentQuestionIndex] || null,
+    error: ({ error }) => error
 }

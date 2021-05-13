@@ -6,6 +6,7 @@
             :key="currentQuestion.id"
             @changeSelectedAnswer="changeSelectedAnswer"
         )
+        Error(v-if="error")
         button(@click="previousQuestion") Previous question
         button(@click="nextQuestion") Next question
 </template>
@@ -25,29 +26,29 @@ export default {
     },
 
     computed: {
-        ...mapGetters('quiz', ['questionCount', 'currentQuestionIndex', 'currentQuestion'])
+        ...mapGetters('quiz', ['questionCount', 'currentQuestionIndex', 'currentQuestion', 'error'])
     },
 
     methods: {
-        ...mapActions('quiz', ['setQuizData', 'setCurrentQuestionIndex', 'changeSelectedAnswer']),
+        ...mapActions('quiz', ['setQuizData', 'setCurrentQuestionIndex', 'setError', 'changeSelectedAnswer']),
 
         previousQuestion() {
-            if (this.currentQuestionIndex === 0) {
-                return
-            }
+            if (this.currentQuestionIndex === 0) return
 
+            this.setError(false)
             this.setCurrentQuestionIndex(this.currentQuestionIndex - 1)
         },
 
         nextQuestion() {
-            if (this.currentQuestionIndex === this.questionCount - 1) {
-                return
-            }
+            if (this.currentQuestionIndex === this.questionCount - 1) return
 
             if (!this.currentQuestion.selectedAnswer) {
+                this.setError(true)
+
                 return
             }
 
+            this.setError(false)
             this.setCurrentQuestionIndex(this.currentQuestionIndex + 1)
         }
     }

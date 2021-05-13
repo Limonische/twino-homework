@@ -52,13 +52,13 @@ export default {
     &__answer
         cursor: pointer
         display: flex
-        height: 1.15em
     &__label
+        width: 100%
         display: flex
     &__bullet
         +transition(border)
         height: 1em
-        width: 1em
+        flex: 0 0 1em
         border-radius: 50%
         border: 1px solid var(--color-gray-1000)
         margin-right: .5em

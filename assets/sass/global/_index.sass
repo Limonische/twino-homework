@@ -1,0 +1,16 @@
+@use 'mixins' as *
+
+@use 'variables'
+@use 'transitions'
+
+*
+    &:focus
+        outline: none
+    &, &:before, &:after
+        box-sizing: border-box
+
+\:root
+    +fluidType(320px, 1920px, 12px, 18px)
+    font-family: var(--primary-font)
+    color: var(--color-black-1000)
+    background-color: var(--color-white-1000)

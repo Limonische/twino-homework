@@ -12,7 +12,7 @@ export default {
         link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
     },
 
-    css: [],
+    css: ['normalize.css', '~/assets/sass/styles'],
 
     plugins: [],
 
@@ -38,5 +38,13 @@ export default {
         }
     },
 
-    build: {}
+    build: {
+        loaders: {
+            sass: {
+                sassOptions: {
+                    includePaths: ['assets/sass/abstracts']
+                }
+            }
+        }
+    }
 }

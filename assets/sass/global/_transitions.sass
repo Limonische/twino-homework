@@ -1,0 +1,11 @@
+@use 'mixins' as *
+
+.expand
+    &-enter-active, &-leave-active
+        transition: height, opacity
+        transition-duration: .5s
+        transition-timing-function: ease-in-out
+        overflow: hidden
+    &-enter, &-leave-to
+        opacity: 0
+        height: 0

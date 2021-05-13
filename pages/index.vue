@@ -1,5 +1,6 @@
 <template lang="pug">
     .index-page
+        h1.index-page__heading Suitability test
         Progress
         Question(
             v-if="currentQuestion"

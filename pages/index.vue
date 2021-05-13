@@ -6,7 +6,7 @@
             v-if="currentQuestion"
             :question="currentQuestion"
             :key="currentQuestion.id"
-            @changeSelectedAnswer="changeSelectedAnswer"
+            @changeSelectedAnswer="onChangeSelectedAnswer"
         )
         Summary(v-if="!currentQuestion")
         Error(v-if="error")
@@ -69,6 +69,11 @@ export default {
 
             this.setError(false)
             this.setCurrentQuestionIndex(this.currentQuestionIndex + 1)
+        },
+
+        onChangeSelectedAnswer(e) {
+            this.setError(false)
+            this.changeSelectedAnswer(e)
         }
     }
 }

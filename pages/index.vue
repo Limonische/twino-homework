@@ -1,23 +1,24 @@
 <template lang="pug">
     .index-page
-        h1.index-page__heading Suitability test
-        Progress
-        Question(
-            v-if="currentQuestion"
-            :question="currentQuestion"
-            :key="currentQuestion.id"
-            @changeSelectedAnswer="onChangeSelectedAnswer"
-        )
-        Summary(v-if="!currentQuestion")
-        Error(v-if="error")
-        BaseLink(
-            v-if="currentQuestionIndex !== 0"
-            @click="previousQuestion"
-        ) Previous question
-        BaseButton(
-            v-if="currentQuestion"
-            @click="nextQuestion"
-        ) {{ currentQuestionIndex === questionCount - 1 ? 'Show summary' : 'Next question' }}
+        .index-page__container
+            h1.index-page__heading Suitability test
+            Progress
+            Question(
+                v-if="currentQuestion"
+                :question="currentQuestion"
+                :key="currentQuestion.id"
+                @changeSelectedAnswer="onChangeSelectedAnswer"
+            )
+            Summary(v-if="!currentQuestion")
+            Error(v-if="error")
+            BaseLink(
+                v-if="currentQuestionIndex !== 0"
+                @click="previousQuestion"
+            ) Previous question
+            BaseButton(
+                v-if="currentQuestion"
+                @click="nextQuestion"
+            ) {{ currentQuestionIndex === questionCount - 1 ? 'Show summary' : 'Next question' }}
 </template>
 
 <script>
@@ -78,3 +79,11 @@ export default {
     }
 }
 </script>
+
+<style lang="sass" scoped>
+.index-page
+    padding: 0 2rem
+    &__container
+        max-width: 700px
+        margin: 0 auto
+</style>

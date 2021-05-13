@@ -11,14 +11,14 @@
             )
             Summary(v-if="!currentQuestion")
             Error(v-if="error")
-            BaseLink(
-                v-if="currentQuestionIndex !== 0"
-                @click="previousQuestion"
-            ) Previous question
             BaseButton(
                 v-if="currentQuestion"
                 @click="nextQuestion"
             ) {{ currentQuestionIndex === questionCount - 1 ? 'Show summary' : 'Next question' }}
+            BaseLink(
+                v-if="currentQuestionIndex !== 0"
+                @click="previousQuestion"
+            ) Previous question
 </template>
 
 <script>
